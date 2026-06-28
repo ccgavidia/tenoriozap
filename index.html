@@ -336,7 +336,6 @@
                                     ${oldPriceHtml}
                                     <p class="text-2xl font-black text-gray-900">S/ ${priceNum}</p>
                                 </div>
-                                <!-- MODIFICADO: ID encerrado en comillas simples ('${product.id}') para evitar ReferenceError -->
                                 <button onclick="openSizeModal('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.img}', '${product.sizes}')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-red-600 transition-colors flex justify-center items-center gap-2">
                                     <i class="fa-solid fa-cart-plus"></i> Añadir
                                 </button>
@@ -454,7 +453,7 @@
         }
 
         // ==========================================
-        // 4. LÓGICA DEL CARRITO (Actualizado para Tallas)
+        // 4. LÓGICA DEL CARRITO 
         // ==========================================
         function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
@@ -578,10 +577,12 @@
             cart.forEach(item => {
                 const sub = item.price * item.qty;
                 total += sub;
+                // Se agregó el enlace de la imagen debajo de cada producto
                 text += `👟 ${item.qty}x ${item.name} - *Talla ${item.size}* (S/ ${sub.toFixed(2)})\n`;
+                text += `   📸 Imagen: ${item.img}\n\n`;
             });
 
-            text += `\n💰 *Total a Pagar: S/ ${total.toFixed(2)}*\n\n¿Cuáles son los métodos de pago?`;
+            text += `💰 *Total a Pagar: S/ ${total.toFixed(2)}*\n\n¿Cuáles son los métodos de pago?`;
 
             const phone = "51948708007"; 
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
